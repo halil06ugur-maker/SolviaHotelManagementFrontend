@@ -23,14 +23,14 @@
         }
 
             .navbar-brand span {
-                font-weight: 300; /* light font for motto */
+                font-weight: 300;
                 font-size: 1rem;
                 margin-left: 10px;
-                color: #FFD700; /* yellow for motto */
+                color: #FFD700;
             }
 
         .logout-btn {
-            color: #FFD700; /* yellow text */
+            color: #FFD700;
             border: 1px solid #FFD700;
             padding: 6px 12px;
             border-radius: 6px;
@@ -39,8 +39,8 @@
         }
 
             .logout-btn:hover {
-                background-color: #FFD700; /* yellow bg */
-                color: #003366; /* dark navy text */
+                background-color: #FFD700;
+                color: #003366;
             }
 
         /* Sidebar */
@@ -54,30 +54,55 @@
             justify-content: space-between;
         }
 
-            .sidebar a {
+            .sidebar .menu-item {
                 color: white;
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
                 padding: 12px 20px;
                 text-decoration: none;
-                font-weight: 800; /* stronger bold than navbar */
+                text-transform: uppercase;
+                font-weight: 700; /* Bold */
+                cursor: pointer;
             }
 
-                .sidebar a:hover {
-                    background-color: #FFD700; /* yellow hover */
+                .sidebar .menu-item:hover {
+                    background-color: #FFD700;
                     color: #003366;
                 }
 
-            .sidebar .logout {
-                margin-top: auto;
-                margin-bottom: 20px;
-                color: #FFD700; /* yellow logout link */
-                font-weight: 700;
+        .submenu {
+            display: none;
+            flex-direction: column;
+            padding-left: 20px;
+        }
+
+            .submenu a {
+                color: white;
+                padding: 8px 20px;
+                text-decoration: none;
+                text-transform: capitalize; /* Daha doðal görünüm */
+                font-weight: normal; /* Bold deðil */
+                font-size: 0.95rem;
             }
 
-                .sidebar .logout:hover {
-                    background-color: #FFD700; /* yellow bg */
-                    color: #003366; /* dark navy text */
+                .submenu a:hover {
+                    background-color: #FFD700;
+                    color: #003366;
                 }
+
+        .sidebar .logout {
+            margin-top: auto;
+            margin-bottom: 20px;
+            color: #FFD700;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+            .sidebar .logout:hover {
+                background-color: #FFD700;
+                color: #003366;
+            }
 
         /* Dashboard */
         .dashboard-title {
@@ -102,7 +127,7 @@
         .card-icon {
             font-size: 2rem;
             margin-bottom: 10px;
-            color: #FFD700; /* yellow icon */
+            color: #FFD700;
         }
     </style>
 </head>
@@ -125,11 +150,39 @@
             <!-- Sidebar -->
             <div class="col-2 sidebar">
                 <div>
-                    <a href="#">HOTEL</a>
-                    <a href="#">ROOM</a>
-                    <a href="#">EMPLOYEE</a>
-                    <a href="#">CUSTOMER</a>
+                    <!-- Hotel with submenu -->
+                    <div class="menu-item" onclick="toggleSubmenu('hotelSubmenu')">
+                        HOTEL <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="submenu" id="hotelSubmenu">
+                        <a href="#">Hotels</a>
+                    </div>
+
+                    <!-- Room -->
+                    <div class="menu-item">ROOM</div>
+
+                    <!-- Employee with submenu -->
+                    <div class="menu-item" onclick="toggleSubmenu('employeeSubmenu')">
+                        EMPLOYEE <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="submenu" id="employeeSubmenu">
+                        <a href="#">Roles</a>
+                        <a href="#">Employees</a>
+                        <a href="#">Assignments</a>
+                    </div>
+
+                    <!-- Customer with submenu -->
+                    <div class="menu-item" onclick="toggleSubmenu('customerSubmenu')">
+                        CUSTOMER <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="submenu" id="customerSubmenu">
+                        <a href="#">Customers</a>
+                        <a href="#">Reservations</a>
+                        <a href="#">Ratings</a>
+                    </div>
                 </div>
+
+                <!-- Logout -->
                 <a href="#" class="logout"><i class="fas fa-right-from-bracket"></i> Logout</a>
             </div>
 
@@ -164,6 +217,14 @@
 
         </div>
     </div>
+
+    <!-- JS for submenu toggle -->
+    <script>
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id);
+            submenu.style.display = submenu.style.display === "flex" ? "none" : "flex";
+        }
+    </script>
 
 </body>
 </html>
