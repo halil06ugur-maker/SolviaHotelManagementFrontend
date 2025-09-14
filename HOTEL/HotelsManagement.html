@@ -52,7 +52,7 @@
         }
 
         .table-container {
-            max-width: 1100px; /* sağdaki boşluğu kısalt */
+            max-width: 1100px;
             margin: auto;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
@@ -79,6 +79,7 @@
                 border-radius: 2px;
             }
 
+        /* Add button */
         .btn-add {
             background-color: #FFD700;
             color: #003366;
@@ -91,15 +92,18 @@
                 color: #fff;
             }
 
-        table thead {
-            background-color: #003366;
-            color: white;
+        /* Table */
+        .solvia-table > :not(caption) > thead > tr > th {
+            color: #003366 !important; /* Lacivert yazı */
+            background-color: #ffffff !important; /* Beyaz arka plan */
+            font-weight: 700;
         }
 
         table tbody tr:hover {
             background-color: #f9fbff;
         }
 
+        /* Buttons */
         .btn-edit {
             background-color: #007bff;
             color: white;
@@ -131,6 +135,11 @@
             background-color: #e6c200;
             color: white;
         }
+
+        /* Name sütununu bold yap */
+        table tbody td:nth-child(2) {
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -141,10 +150,7 @@
             <i class="fas fa-sun" style="color:#FFD700;"></i> SOLVIA
             <span>The Road to the Sun...</span>
         </a>
-
-        <a href="#" class="logout-btn">
-            <i class="fas fa-right-from-bracket"></i> Logout
-        </a>
+        <a href="#" class="logout-btn"><i class="fas fa-right-from-bracket"></i> Logout</a>
     </nav>
 
     <!-- Content -->
@@ -155,15 +161,15 @@
                 <button class="btn btn-add"><i class="fas fa-plus"></i> Add Hotel</button>
             </div>
 
-            <table class="table align-middle">
+            <table class="table align-middle solvia-table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Tax No</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Created Date</th>
-                        <th scope="col">Actions</th>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Tax No</th>
+                        <th>Phone</th>
+                        <th>Created Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -176,7 +182,7 @@
                         <td>
                             <button class="btn btn-sm btn-edit"><i class="fas fa-pen"></i> Edit</button>
                             <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i> Delete</button>
-                            <button class="btn btn-sm btn-details"><i class="fas fa-eye"></i> Details</button>
+                            <a href="HOTEL/HotelDetail.html?id=1" class="btn btn-sm btn-details"><i class="fas fa-eye"></i> Details</a>
                         </td>
                     </tr>
                     <tr>
@@ -188,7 +194,43 @@
                         <td>
                             <button class="btn btn-sm btn-edit"><i class="fas fa-pen"></i> Edit</button>
                             <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i> Delete</button>
-                            <button class="btn btn-sm btn-details"><i class="fas fa-eye"></i> Details</button>
+                            <a href="HOTEL/HotelDetail.html?id=2" class="btn btn-sm btn-details"><i class="fas fa-eye"></i> Details</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Golden Beach Resort</td>
+                        <td>4561237890</td>
+                        <td>+90 242 333 2233</td>
+                        <td>2025-07-05</td>
+                        <td>
+                            <button class="btn btn-sm btn-edit"><i class="fas fa-pen"></i> Edit</button>
+                            <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i> Delete</button>
+                            <a href="HOTEL/HotelDetail.html?id=3" class="btn btn-sm btn-details"><i class="fas fa-eye"></i> Details</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Emerald Palace</td>
+                        <td>7418529630</td>
+                        <td>+90 212 888 4455</td>
+                        <td>2025-06-18</td>
+                        <td>
+                            <button class="btn btn-sm btn-edit"><i class="fas fa-pen"></i> Edit</button>
+                            <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i> Delete</button>
+                            <a href="HOTEL/HotelDetail.html?id=4" class="btn btn-sm btn-details"><i class="fas fa-eye"></i> Details</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Royal Hills Hotel</td>
+                        <td>8529637410</td>
+                        <td>+90 312 777 5566</td>
+                        <td>2025-05-12</td>
+                        <td>
+                            <button class="btn btn-sm btn-edit"><i class="fas fa-pen"></i> Edit</button>
+                            <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i> Delete</button>
+                            <a href="HOTEL/HotelDetail.html?id=5" class="btn btn-sm btn-details"><i class="fas fa-eye"></i> Details</a>
                         </td>
                     </tr>
                 </tbody>
