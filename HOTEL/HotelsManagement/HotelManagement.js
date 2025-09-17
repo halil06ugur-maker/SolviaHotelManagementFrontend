@@ -109,8 +109,9 @@ async function removeHotel(id) {
 
 // Detay sayfasına git
 function goToDetail(id) {
-    window.open(`HotelDetail/HotelDetail.html?id=${id}`, "_blank");
+    window.open("HotelDetail/HotelDetail.html?id=" + id, "_blank");
 }
+
 
 // Form submit
 document.addEventListener("DOMContentLoaded", () => {
