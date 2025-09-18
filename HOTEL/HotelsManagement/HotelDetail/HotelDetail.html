@@ -136,7 +136,7 @@
                 <div class="hotel-cover">
                     <img src="https://images.etstur.com/files/images/hotelImages/TR/54465/l/Sunrise-Resort-Hotel-Genel-400009.jpg" alt="Hotel Cover">
                     <div class="hotel-title">
-                        
+
                     </div>
                 </div>
             </div>
@@ -148,6 +148,9 @@
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" id="properties-tab" data-bs-toggle="tab" data-bs-target="#properties" type="button">Properties</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button">Images</button>
                 </li>
             </ul>
 
@@ -186,6 +189,24 @@
                         <li class="list-group-item">Spa: <span id="isSpa"></span></li>
                         <li class="list-group-item">Adult Only: <span id="isAdult"></span></li>
                     </ul>
+                </div>
+                <!-- Images Tab -->
+                <div class="tab-pane fade" id="images" role="tabpanel">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4>Hotel Images</h4>
+                        <button class="btn btn-success btn-sm" onclick="openAddImageForm()">+ New Image</button>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Preview</th>
+                                <th>Image URL</th>
+                                <th>Created Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="imageTableBody"></tbody>
+                    </table>
                 </div>
             </div>
 
@@ -250,7 +271,40 @@
             </div>
         </div>
     </div>
-
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="imageForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalTitle">Add Image</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="imageId">
+                        <div class="mb-3">
+                            <label for="imgUrl" class="form-label">Image URL</label>
+                            <input type="text" id="imgUrl" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Image Preview Modal -->
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-center">
+                <div class="modal-body p-0">
+                    <img id="previewImage" src="" alt="Preview" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="HotelDetail.js"></script>
