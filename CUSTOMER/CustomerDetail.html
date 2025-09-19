@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Detail</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: url('https://windycitytravel.com/wp-content/uploads/2018/10/Tropical-vacation.-Young-beautiful-woman-in-black-dress-and-hat-on-the-beach.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .navbar-brand span {
+                font-weight: 300;
+                font-size: 1rem;
+                margin-left: 10px;
+                color: #FFD700;
+            }
+
+        .logout-btn {
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .logout-btn:hover {
+                background-color: #FFD700;
+                color: #003366;
+            }
+
+        .content {
+            padding: 40px 15px;
+        }
+
+        .detail-container {
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            padding: 25px;
+        }
+
+        .customer-header {
+            margin-bottom: 30px;
+        }
+
+        .customer-cover {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            margin-bottom: 20px;
+        }
+
+            .customer-cover img {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+                display: block;
+            }
+
+        .customer-title {
+            margin: 0 auto;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #FFD700;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+            letter-spacing: 1.5px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .custom-tabs .nav-link {
+            color: #003366;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+
+            .custom-tabs .nav-link:hover {
+                background-color: #fff4cc;
+                color: #003366;
+            }
+
+            .custom-tabs .nav-link.active {
+                background-color: #003366;
+                color: #FFD700;
+                border: none;
+                box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+            }
+
+        .tab-content {
+            background: #fff;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark px-3">
+        <a class="navbar-brand" href="../admin_paneli.html">
+            <i class="fas fa-sun" style="color:#FFD700;"></i> SOLVIA
+            <span>The Road to the Sun...</span>
+        </a>
+        <a href="#" class="logout-btn"><i class="fas fa-right-from-bracket"></i> Logout</a>
+    </nav>
+
+    <!-- Content -->
+    <div class="content container-fluid">
+        <div class="detail-container">
+
+            <!-- Customer Header (Kapak) -->
+            <div class="customer-header">
+                <div class="customer-cover">
+                    <img src="https://images.goway.com/production/featured_images/shutterstock_137193326.jpg" alt="Customer Cover">
+                    <div class="customer-title">Customer Detail</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs custom-tabs" id="customerTab" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button">Information</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="reservations-tab" data-bs-toggle="tab" data-bs-target="#reservations" type="button">Reservations</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="ratings-tab" data-bs-toggle="tab" data-bs-target="#ratings" type="button">Ratings</button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="customerTabContent">
+                <!-- Info Tab -->
+                <div class="tab-pane fade show active" id="info" role="tabpanel">
+                    <h4>Customer Information</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">Name: Emily</li>
+                        <li class="list-group-item">Surname: Johnson</li>
+                        <li class="list-group-item">Phone: +90 555 111 2233</li>
+                        <li class="list-group-item">Email: emily.j@example.com</li>
+                        <li class="list-group-item">Created Date: 2025-09-18</li>
+                    </ul>
+                </div>
+
+                <!-- Reservations Tab -->
+                <div class="tab-pane fade" id="reservations" role="tabpanel">
+                    <h4>Reservations</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hotel</th>
+                                <th>Room</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Sunrise Resort</td>
+                                <td>101</td>
+                                <td>2025-10-01</td>
+                                <td>2025-10-07</td>
+                                <td><button class="btn btn-sm btn-danger">Cancel</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Ratings Tab -->
+                <div class="tab-pane fade" id="ratings" role="tabpanel">
+                    <h4>Ratings</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hotel</th>
+                                <th>Rate</th>
+                                <th>Description</th>
+                                <th>Created Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Blue Lagoon Hotel</td>
+                                <td>5</td>
+                                <td>Excellent stay, highly recommended!</td>
+                                <td>2025-09-10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
