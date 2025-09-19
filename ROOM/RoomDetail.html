@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Detail</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: url('https://cdn.wallpapersafari.com/58/67/FPjD48.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .navbar-brand span {
+                font-weight: 300;
+                font-size: 1rem;
+                margin-left: 10px;
+                color: #FFD700;
+            }
+
+        .logout-btn {
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .logout-btn:hover {
+                background-color: #FFD700;
+                color: #003366;
+            }
+
+        .content {
+            padding: 40px 15px;
+        }
+
+        .detail-container {
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            padding: 25px;
+        }
+
+        .room-header {
+            margin-bottom: 30px;
+        }
+
+        .room-cover {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+            .room-cover img {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                display: block;
+            }
+
+        .room-title {
+            margin: 0 auto;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #FFD700;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+            letter-spacing: 1.5px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .custom-tabs .nav-link {
+            color: #003366;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+
+            .custom-tabs .nav-link:hover {
+                background-color: #fff4cc;
+                color: #003366;
+            }
+
+            .custom-tabs .nav-link.active {
+                background-color: #003366;
+                color: #FFD700;
+                border: none;
+                box-shadow: 0 -2px 8px rgba(0,0,0,0.15);
+            }
+
+        .tab-content {
+            background: #fff;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark px-3">
+        <a class="navbar-brand" href="../admin_paneli.html">
+            <i class="fas fa-sun" style="color:#FFD700;"></i> SOLVIA
+            <span>The Road to the Sun...</span>
+        </a>
+        <a href="#" class="logout-btn">
+            <i class="fas fa-right-from-bracket"></i> Logout
+        </a>
+    </nav>
+
+    <!-- Content -->
+    <div class="content container-fluid">
+        <div class="detail-container">
+
+            <!-- Room Header -->
+            <div class="room-header">
+                <div class="room-cover">
+                    <img src="https://www.nikoseasideresort.com/wp-content/uploads/sites/13/2022/04/deluxe_stunning_sea_view_plunge_pool_slide_01.jpg" alt="Room Cover">
+                    <div class="room-title">Deluxe Sea View Room</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <ul class="nav nav-tabs custom-tabs" id="roomTab" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button">Information</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="hotel-tab" data-bs-toggle="tab" data-bs-target="#hotel" type="button">Hotel</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="reservations-tab" data-bs-toggle="tab" data-bs-target="#reservations" type="button">Reservations</button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="roomTabContent">
+                <!-- Info Tab -->
+                <div class="tab-pane fade show active" id="info" role="tabpanel">
+                    <h4>Room Information</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">Room Number: 101</li>
+                        <li class="list-group-item">Created Date: 2025-09-18</li>
+                        <li class="list-group-item">Type: Deluxe Sea View</li>
+                    </ul>
+                </div>
+
+                <!-- Hotel Tab -->
+                <div class="tab-pane fade" id="hotel" role="tabpanel">
+                    <h4>Hotel Information</h4>
+                    <p><strong>Hotel:</strong> Sunrise Resort</p>
+                    <p><strong>Location:</strong> Antalya, Turkey</p>
+                </div>
+
+                <!-- Reservations Tab -->
+                <div class="tab-pane fade" id="reservations" role="tabpanel">
+                    <h4>Reservations</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Doe</td>
+                                <td>2025-10-01</td>
+                                <td>2025-10-07</td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
