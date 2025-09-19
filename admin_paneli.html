@@ -160,26 +160,31 @@
                     </div>
 
                     <!-- Room -->
-                    <div class="menu-item">ROOM</div>
+                    <div class="menu-item" onclick="toggleSubmenu('roomSubmenu')">
+                        <a href="ROOM/RoomManagement.html" style="color:white; text-decoration:none;">ROOM</a>
+                    </div>
+
+
 
                     <!-- Employee with submenu -->
                     <div class="menu-item" onclick="toggleSubmenu('employeeSubmenu')">
                         EMPLOYEE <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="submenu" id="employeeSubmenu">
-                        <a href="#">Roles</a>
-                        <a href="#">Employees</a>
-                        <a href="#">Assignments</a>
+                        <a href="EMPLOYEE/RoleManagement.html">Roles</a>
+                        <a href="EMPLOYEE/EmployeeManagement.html">Employees</a>
+                        <a href="EMPLOYEE/EmployeeHotelRole.html">Assignments</a>
                     </div>
+
 
                     <!-- Customer with submenu -->
                     <div class="menu-item" onclick="toggleSubmenu('customerSubmenu')">
                         CUSTOMER <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="submenu" id="customerSubmenu">
-                        <a href="#">Customers</a>
-                        <a href="#">Reservations</a>
-                        <a href="#">Ratings</a>
+                        <a href="CUSTOMER/CustomerManagement.html">Customers</a>
+                        <a href="CUSTOMER/ReservationsManagement.html">Reservations</a>
+                        <a href="CUSTOMER/RatingsManagement.html">Ratings</a>
                     </div>
                 </div>
 
