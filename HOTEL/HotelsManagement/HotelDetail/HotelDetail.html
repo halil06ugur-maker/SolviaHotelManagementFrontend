@@ -131,16 +131,19 @@
     <div class="content container-fluid">
         <div class="detail-container">
 
-            <!-- Hotel Header -->
             <div class="hotel-header">
-                <div class="hotel-cover">
-                    <img src="https://images.etstur.com/files/images/hotelImages/TR/54465/l/Sunrise-Resort-Hotel-Genel-400009.jpg" alt="Hotel Cover">
-                    <div class="hotel-title">
+                <div class="hotel-cover position-relative">
+                    <img id="coverImage"
+                         src="https://via.placeholder.com/1200x400?text=Hotel+Cover"
+                         alt="Hotel Cover"
+                         class="w-100 rounded shadow-lg"
+                         style="height:400px; object-fit:cover;">
 
+                    <div class="hotel-title position-absolute top-50 start-50 translate-middle text-center text-light">
+                        <h1 id="hotelName"></h1>
                     </div>
                 </div>
             </div>
-
             <!-- Tabs -->
             <ul class="nav nav-tabs custom-tabs" id="hotelTab" role="tablist">
                 <li class="nav-item">
@@ -151,6 +154,9 @@
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button">Images</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="rooms-tab" data-bs-toggle="tab" data-bs-target="#rooms" type="button">Rooms</button>
                 </li>
             </ul>
 
@@ -206,6 +212,25 @@
                             </tr>
                         </thead>
                         <tbody id="imageTableBody"></tbody>
+                    </table>
+                </div>
+                <!-- HotelRooms Tab -->
+                <div class="tab-pane fade" id="rooms" role="tabpanel">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4>Hotel Rooms</h4>
+                        <button class="btn btn-success btn-sm" onclick="openAddRoomForm()">+ New Room</button>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Room Number</th>
+                                <th>Room Type</th>
+                                <th>IsReserved</th>
+                                <th>CreatedDate</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roomTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -305,6 +330,43 @@
             </div>
         </div>
     </div>
+    <!-- Hotel Room Modal -->
+    <div class="modal fade" id="roomModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="roomForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="roomModalTitle">Add Room</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="hotelRoomId">
+
+                        <!-- Room Select -->
+                        <div class="mb-3">
+                            <label for="roomSelect" class="form-label">Select Room</label>
+                            <select id="roomSelect" class="form-select" required></select>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="isReserved">
+                            <label class="form-check-label" for="isReserved">Is Reserved</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="createdDate" class="form-label">Created Date</label>
+                            <input type="date" id="createdDate" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="HotelDetail.js"></script>
