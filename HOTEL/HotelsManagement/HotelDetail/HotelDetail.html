@@ -226,7 +226,6 @@
                                 <th>Room Number</th>
                                 <th>Room Type</th>
                                 <th>IsReserved</th>
-                                <th>CreatedDate</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -348,14 +347,15 @@
                             <select id="roomSelect" class="form-select" required></select>
                         </div>
 
+                        <!-- Room Type -->
+                        <div class="mb-3">
+                            <label for="roomTypeInput" class="form-label">Room Type</label>
+                            <input type="text" id="roomTypeInput" class="form-control" required>
+                        </div>
+
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="isReserved">
                             <label class="form-check-label" for="isReserved">Is Reserved</label>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="createdDate" class="form-label">Created Date</label>
-                            <input type="date" id="createdDate" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">

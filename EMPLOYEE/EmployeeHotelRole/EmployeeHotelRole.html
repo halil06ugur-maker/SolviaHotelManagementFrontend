@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee-Hotel-Role Assignments</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-image: url("https://images.unsplash.com/photo-1551418988-c21e451467b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .assignment-cover img {
+            width: 100%; /* container genişliğini aşmasın */
+            max-height: 250px; /* çok uzun olmasın */
+            object-fit: cover; /* taşan kısmı kırparak ortalar */
+            border-radius: 10px; /* köşeler yumuşak olsun */
+            margin-bottom: 20px; /* aşağıya biraz boşluk bırak */
+        }
+
+            .navbar-brand span {
+                font-weight: 300;
+                font-size: 1rem;
+                margin-left: 10px;
+                color: #FFD700;
+            }
+
+        .logout-btn {
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .logout-btn:hover {
+                background-color: #FFD700;
+                color: #003366;
+            }
+
+        .content {
+            padding: 40px 15px;
+        }
+
+        .detail-container {
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            padding: 25px;
+        }
+
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #003366;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+            .dashboard-title::after {
+                content: "";
+                display: block;
+                width: 120px;
+                height: 4px;
+                background: #FFD700;
+                margin: 10px auto 0;
+                border-radius: 2px;
+            }
+
+        .btn-add {
+            background-color: #FFD700;
+            color: #003366;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+            .btn-add:hover {
+                background-color: #e6c200;
+                color: #fff;
+            }
+
+        table thead {
+            background-color: #003366;
+            color: white;
+        }
+
+        table tbody tr:hover {
+            background-color: #f9fbff;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+            color: white;
+            border-radius: 6px;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            border-radius: 6px;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+            border-radius: 6px;
+        }
+
+        .btn-edit:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-delete:hover {
+            background-color: #b52a37;
+        }
+
+        .btn-info:hover {
+            background-color: #11707f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark px-3">
+        <a class="navbar-brand" href="file:///C:/Users/Halil/Desktop/github/repo/SolviaHotelManagementFrontend/admin_paneli.html">
+            <i class="fas fa-sun" style="color:#FFD700;"></i> SOLVIA
+            <span>The Road to the Sun...</span>
+        </a>
+        <a href="#" class="logout-btn"><i class="fas fa-right-from-bracket"></i> Logout</a>
+    </nav>
+
+    <!-- Content -->
+    <div class="content container-fluid">
+        <div class="detail-container">
+            <!-- Cover -->
+            <div class="assignment-cover">
+                <img src="https://poloandtweed.com/wp-content/uploads/2015/10/Staff-Crop.png"
+                     alt="Assignment Cover">
+            </div>
+            <!-- Title + Filters + Add -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="dashboard-title">Assignments</h1>
+                <div class="d-flex gap-2">
+                    <select id="filterHotel" class="form-select"><option value="">-- Filter by Hotel --</option></select>
+                    <select id="filterRole" class="form-select"><option value="">-- Filter by Role --</option></select>
+                    <button class="btn btn-secondary" onclick="resetFilters()">Reset</button>
+                    <button class="btn btn-add" onclick="openAddModal()"><i class="fas fa-plus"></i> Add Assignment</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Employee</th>
+                        <th>Hotel</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="assignmentTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal fade" id="assignmentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="assignmentForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignmentModalLabel">Add Assignment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id">
+                    <div class="mb-3">
+                        <label class="form-label">Employee</label>
+                        <select id="employeeId" class="form-select" required></select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hotel</label>
+                        <select id="hotelId" class="form-select" required onchange="loadRolesDropdown(this.value)"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <select id="roleId" class="form-select" required></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Assignment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="detailsBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Assignments.js"></script>
+</body>
+</html>

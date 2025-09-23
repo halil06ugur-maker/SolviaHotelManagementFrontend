@@ -10,11 +10,19 @@ let hotelId = null;
 async function parseResult(response) {
     const text = await response.text();
     const json = text ? JSON.parse(text) : {};
-    const ok =
+
+    let ok =
         json.success ??
         json.isSuccess ??
         json.Success ??
         (response.ok && (json.data !== undefined || json.Data !== undefined));
+
+    // Eğer HTTP 200 dönüyorsa ve message içinde "başarıyla" varsa, yine başarılı kabul et
+    if (!ok && response.ok && typeof json.message === "string") {
+        if (json.message.toLowerCase().includes("başarıyla")) {
+            ok = true;
+        }
+    }
 
     return {
         ok,
@@ -24,6 +32,7 @@ async function parseResult(response) {
         status: response.status
     };
 }
+
 
 /* -------------------- Sayfa Yüklenince -------------------- */
 document.addEventListener("DOMContentLoaded", async () => {
@@ -336,6 +345,7 @@ function previewImage(url) {
 /* =========================================================
    ROOMS (HotelRoom + Room dropdown)
    ========================================================= */
+
 // Dropdown’ı API_ROOM’dan doldur
 async function loadRoomDropdown(selectedId = null) {
     try {
@@ -370,14 +380,30 @@ async function loadHotelRooms() {
     tbody.innerHTML = "";
 
     if (result.ok && result.data) {
-        // Eğer data array içindeyse ve rooms altına geldiyse:
         let rooms = [];
+
         if (Array.isArray(result.data)) {
-            if (result.data[0]?.rooms) {
-                rooms = result.data[0].rooms;  // odalara in
+            // 🔑 doğru oteli bul
+            const hotel = result.data.find(h => String(h.hotelId ?? h.HotelId) === String(hotelId));
+            if (hotel && Array.isArray(hotel.rooms)) {
+                rooms = hotel.rooms;
             } else {
-                rooms = result.data; // direkt rooms dönüyorsa
+                rooms = []; // bu hotelin odası yoksa boş liste
             }
+        } else {
+            rooms = result.data.rooms ?? [];
+        }
+
+        // Oda numaralarını sıralayalım (alfabetik)
+        rooms.sort((a, b) => {
+            const numA = (a.roomNumber ?? a.RoomNumber ?? "").toString().toLowerCase();
+            const numB = (b.roomNumber ?? b.RoomNumber ?? "").toString().toLowerCase();
+            return numA.localeCompare(numB, "tr");
+        });
+
+        if (rooms.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" class="text-center">Bu otelde oda bulunamadı.</td></tr>`;
+            return;
         }
 
         rooms.forEach(hr => {
@@ -386,36 +412,34 @@ async function loadHotelRooms() {
                 <td>${hr.roomNumber ?? hr.RoomNumber ?? "-"}</td>
                 <td>${hr.roomType ?? hr.RoomType ?? "-"}</td>
                 <td>${hr.isReserved ? "Yes" : "No"}</td>
-                <td>${hr.createdDate ? new Date(hr.createdDate).toLocaleDateString() : "-"}</td>
                 <td>
                     <button class="btn btn-sm btn-warning" 
-                        onclick="openEditRoomForm(${hr.hotelRoomId}, ${hr.roomId}, '${hr.roomType ?? hr.RoomType}', ${hr.isReserved}, '${hr.createdDate ?? ""}')">
+                        onclick="openEditRoomForm(${hr.hotelRoomId ?? hr.id}, ${hr.roomId}, '${hr.roomType ?? hr.RoomType}', ${hr.isReserved})">
                         Edit
                     </button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteRoom(${hr.hotelRoomId})">Delete</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteRoom(${hr.hotelRoomId ?? hr.id})">Delete</button>
                 </td>
             `;
             tbody.appendChild(tr);
         });
     }
 }
-
 /* -------------------- Modal Açılışları -------------------- */
 function openAddRoomForm() {
     document.getElementById("roomModalTitle").innerText = "Add Room";
     document.getElementById("hotelRoomId").value = "";
     document.getElementById("roomSelect").value = "";
+    document.getElementById("roomTypeInput").value = "";
     document.getElementById("isReserved").checked = false;
-    document.getElementById("createdDate").value = new Date().toISOString().split("T")[0];
     new bootstrap.Modal(document.getElementById("roomModal")).show();
 }
 
-function openEditRoomForm(hotelRoomId, roomId, isReserved, createdDate) {
+function openEditRoomForm(hotelRoomId, roomId, roomType, isReserved) {
     document.getElementById("roomModalTitle").innerText = "Edit Room";
     document.getElementById("hotelRoomId").value = hotelRoomId;
     document.getElementById("roomSelect").value = roomId;
+    document.getElementById("roomTypeInput").value = roomType || "";
     document.getElementById("isReserved").checked = isReserved;
-    document.getElementById("createdDate").value = createdDate ? createdDate.split("T")[0] : "";
     new bootstrap.Modal(document.getElementById("roomModal")).show();
 }
 
@@ -425,18 +449,22 @@ async function onSaveRoom(e) {
 
     const hotelRoomId = document.getElementById("hotelRoomId").value;
     const roomId = document.getElementById("roomSelect").value;
+    const roomType = document.getElementById("roomTypeInput").value.trim();
     const isReserved = document.getElementById("isReserved").checked;
 
     const payload = {
-        hotelRoomId: hotelRoomId ? parseInt(hotelRoomId) : 0,
+        id: hotelRoomId ? parseInt(hotelRoomId) : 0,
         hotelId: parseInt(hotelId),
         roomId: parseInt(roomId),
+        type: roomType,
         isReserved: isReserved
     };
 
+    // 🔑 Eğer id varsa PUT /api/HotelRoom/{id} gönder
     const method = hotelRoomId ? "PUT" : "POST";
+    const url = hotelRoomId ? `${API_HOTELROOM}/${hotelRoomId}` : API_HOTELROOM;
 
-    const res = await fetch(API_HOTELROOM, {
+    const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

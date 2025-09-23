@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignments</title>
+    <title>Role Management</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -48,7 +48,7 @@
             padding: 40px 15px;
         }
 
-        .detail-container {
+        .table-container {
             max-width: 1100px;
             margin: auto;
             background: rgba(255, 255, 255, 0.95);
@@ -56,25 +56,6 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.25);
             padding: 25px;
         }
-
-        .assignment-header {
-            margin-bottom: 30px;
-        }
-
-        .assignment-cover {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-            margin-bottom: 20px;
-        }
-
-            .assignment-cover img {
-                width: 100%;
-                height: 250px;
-                object-fit: cover;
-                display: block;
-            }
 
         .dashboard-title {
             font-size: 2rem;
@@ -150,62 +131,57 @@
 
     <!-- Content -->
     <div class="content container-fluid">
-        <div class="detail-container">
-
-            <!-- Assignment Header (Kapak) -->
-            <div class="assignment-header">
-                <div class="assignment-cover">
-                    <img src="https://poloandtweed.com/wp-content/uploads/2015/10/Staff-Crop.png" alt="Assignment Cover">
-                </div>
-            </div>
-
-            <!-- Title + Add Button -->
+        <div class="table-container">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="dashboard-title">Assignments</h1>
-                <button class="btn btn-add"><i class="fas fa-plus"></i> Add Assignment</button>
+                <h1 class="dashboard-title">Role Management</h1>
+                <button class="btn btn-add" onclick="openAddModal()"><i class="fas fa-plus"></i> Add Role</button>
             </div>
 
-            <!-- Assignments Table -->
-            <table class="table align-middle">
+            <table class="table align-middle text-center">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Employee</th>
-                        <th>Hotel</th>
-                        <th>Role</th>
+                        <th>Role Name</th>
+                        <th>Description</th>
                         <th>Created Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>Sunrise Resort</td>
-                        <td>Manager</td>
-                        <td>2025-09-18</td>
-                        <td>
-                            <button class="btn btn-sm btn-edit"><i class="fas fa-pen"></i> Edit</button>
-                            <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i> Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jane Smith</td>
-                        <td>Blue Lagoon Hotel</td>
-                        <td>Receptionist</td>
-                        <td>2025-09-10</td>
-                        <td>
-                            <button class="btn btn-sm btn-edit"><i class="fas fa-pen"></i> Edit</button>
-                            <button class="btn btn-sm btn-delete"><i class="fas fa-trash"></i> Delete</button>
-                        </td>
-                    </tr>
+                <tbody id="roleTableBody">
                 </tbody>
             </table>
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="roleModal" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="roleForm" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roleModalLabel">Add Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Role Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="RoleManagement.js"></script>
 </body>
 </html>
