@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLVIA - Hotel Detail</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+
+        .navbar {
+            background: rgba(0,0,0,0.8);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #FFD700 !important;
+        }
+
+            .navbar-brand span {
+                font-weight: 300;
+                font-size: 1rem;
+                margin-left: 10px;
+                color: #FFD700;
+            }
+
+        .nav-link {
+            color: #fff !important;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+            .nav-link:hover {
+                color: #FFD700 !important;
+            }
+
+        .hotel-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+            .hotel-header img {
+                border-radius: 15px;
+                width: 100%;
+                max-width: 500px;
+                height: 300px;
+                object-fit: cover;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            }
+
+        .hotel-info h2 {
+            font-weight: 700;
+            color: #003366;
+        }
+
+        .rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+
+        .room-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .room-card:hover {
+                transform: translateY(-6px);
+            }
+
+        footer {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+            footer i {
+                margin: 0 10px;
+                color: #FFD700;
+                cursor: pointer;
+            }
+
+                footer i:hover {
+                    color: white;
+                }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-sun"></i> SOLVIA
+                <span>The Road to the Sun...</span>
+            </a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <span id="welcomeText" class="nav-link text-warning"></span>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="hotels.html">Hotels</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item">
+                        <a href="../home.html" id="logoutBtn" class="nav-link text-danger d-none">
+                            <i class="fas fa-right-from-bracket"></i> Çıkış
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hotel Detail -->
+    <div class="container">
+        <div class="hotel-header">
+            <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb2101f?auto=format&fit=crop&w=800&q=80" alt="Hotel Image">
+            <div class="hotel-info">
+                <h2>Sunrise Resort</h2>
+                <p><i class="fas fa-map-marker-alt"></i> Antalya, Turkey</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bu otel sahilde, lüks ve konforlu bir deneyim sunar.</p>
+                <p class="rating"><i class="fas fa-star"></i> 4.5 / 5</p>
+            </div>
+        </div>
+
+        <!-- Rooms Section -->
+        <h3 class="mb-4" style="color:#003366;">Available Rooms</h3>
+        <div class="row g-4">
+            <!-- Room 1 -->
+            <div class="col-md-4">
+                <div class="card room-card">
+                    <img src="https://images.unsplash.com/photo-1560448075-bb4bfc0c8d49?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Room 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Deluxe Room</h5>
+                        <p class="card-text">Price: $120 / night</p>
+                        <button class="btn btn-warning w-100">Reserve</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 2 -->
+            <div class="col-md-4">
+                <div class="card room-card">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Room 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Suite</h5>
+                        <p class="card-text">Price: $200 / night</p>
+                        <button class="btn btn-warning w-100">Reserve</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 3 -->
+            <div class="col-md-4">
+                <div class="card room-card">
+                    <img src="https://images.unsplash.com/photo-1628744445194-022d80139b2d?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Room 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Family Room</h5>
+                        <p class="card-text">Price: $150 / night</p>
+                        <button class="btn btn-warning w-100">Reserve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reservation Form -->
+        <h3 class="mt-5 mb-4" style="color:#003366;">Make a Reservation</h3>
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" id="startDate" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label for="endDate" class="form-label">End Date</label>
+                <input type="date" id="endDate" class="form-control" required>
+            </div>
+            <div class="col-12">
+                <label for="roomSelect" class="form-label">Select Room</label>
+                <select id="roomSelect" class="form-select" required>
+                    <option value="">Choose...</option>
+                    <option value="1">Deluxe Room</option>
+                    <option value="2">Suite</option>
+                    <option value="3">Family Room</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-warning w-100">Confirm Reservation</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 SOLVIA - The Road to the Sun...</p>
+        <div>
+            <i class="fab fa-facebook fa-lg"></i>
+            <i class="fab fa-instagram fa-lg"></i>
+            <i class="fab fa-twitter fa-lg"></i>
+        </div>
+    </footer>
+    <script src="js/common.js"></script>
+</body>
+</html>
