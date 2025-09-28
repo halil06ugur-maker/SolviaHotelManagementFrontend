@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="card-body">
               <h5 class="card-title">${hotel.name}</h5>
               <p class="card-text">Tel: ${hotel.phoneNumber}</p>
-              <a href="hotel_detail.html?id=${hotel.id}" 
+              <a href="HotelDetail.html?id=${hotel.id}" 
                  class="btn btn-warning text-dark w-100">View Details</a>
             </div>
           </div>

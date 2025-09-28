@@ -1,40 +1,35 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const API_URL = "https://localhost:7223/api/Customer";
-    const form = document.getElementById("loginForm");
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    const identityNumber = document.getElementById("identityNumber").value.trim();
+    const phoneNumber = document.getElementById("phoneNumber").value.trim();
 
-        const identityNumber = document.getElementById("identityNumber").value.trim();
-        const phoneNumber = document.getElementById("phoneNumber").value.trim();
+    try {
+        const res = await fetch("https://localhost:7223/api/Customer");
+        const result = await res.json();
 
-        try {
-            const res = await fetch(API_URL);
-            const result = await res.json();
-
-            if (!result.success) {
-                alert("Müşteri listesi alınamadı!");
-                return;
-            }
-
+        if (result.success) {
             const customers = result.data;
+
+            // IdentityNumber + PhoneNumber eşleşiyorsa
             const customer = customers.find(
                 c => c.identityNumber === identityNumber && c.phoneNumber === phoneNumber
             );
 
             if (customer) {
-                // Kullanıcıyı localStorage'a kaydet
+                // ✅ common.js ile aynı key
                 localStorage.setItem("loggedInCustomer", JSON.stringify(customer));
 
-                alert(`Hoş geldin, ${customer.name} ${customer.surname}!`);
-                // Ana sayfaya yönlendir
+                alert(`Hoş geldin ${customer.name} ${customer.surname}`);
                 window.location.href = "home.html";
             } else {
-                alert("Kimlik veya telefon numarası hatalı!");
+                alert("Kimlik veya telefon hatalı!");
             }
-        } catch (err) {
-            console.error("Login hatası:", err);
-            alert("Sunucu hatası!");
+        } else {
+            alert("Müşteri listesi alınamadı.");
         }
-    });
+    } catch (err) {
+        console.error("Login error:", err);
+        alert("Sunucuya bağlanılamadı.");
+    }
 });

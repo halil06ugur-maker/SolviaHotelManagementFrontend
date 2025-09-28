@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOLVIA - Hotel Detail</title>
+    <title>Hotel Detail - SOLVIA</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -12,210 +12,194 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f8f9fa;
-            padding-top: 80px;
         }
 
-        .navbar {
-            background: rgba(0,0,0,0.8);
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
+        .hero {
+            height: 350px; /* yükseklik arttı */
+            max-width: 1200px; /* genişlik biraz daha büyük */
+            margin: 80px auto 0 auto;
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #FFD700 !important;
+            justify-content: center;
+            border-radius: 12px;
+            background-size: cover; /* görseli kaplasın */
+            background-position: center; /* ortalasın */
         }
 
-            .navbar-brand span {
-                font-weight: 300;
-                font-size: 1rem;
-                margin-left: 10px;
-                color: #FFD700;
+            .hero h1 {
+                color: #fff;
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+                font-size: 2rem;
             }
 
-        .nav-link {
-            color: #fff !important;
-            margin: 0 10px;
-            font-weight: 500;
-        }
-
-            .nav-link:hover {
-                color: #FFD700 !important;
-            }
-
-        .hotel-header {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-            .hotel-header img {
-                border-radius: 15px;
-                width: 100%;
-                max-width: 500px;
-                height: 300px;
-                object-fit: cover;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            }
-
-        .hotel-info h2 {
-            font-weight: 700;
-            color: #003366;
-        }
-
-        .rating {
-            color: #FFD700;
-            font-size: 1.2rem;
+        .hotel-images img {
+            border-radius: 10px;
+            object-fit: cover;
+            height: 220px;
+            width: 100%;
+            cursor: pointer;
         }
 
         .room-card {
             border: none;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
         }
 
             .room-card:hover {
-                transform: translateY(-6px);
+                transform: translateY(-5px);
+            }
+
+        .star-bar {
+            font-size: 1.2rem;
+            color: #FFD700;
+        }
+
+        .rating-stars i {
+            font-size: 2rem;
+            color: #ccc;
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+            .rating-stars i:hover {
+                transform: scale(1.2);
+                color: #FFD700;
+            }
+
+            .rating-stars i.active {
+                color: #FFD700;
             }
 
         footer {
-            background-color: #003366;
-            color: white;
+            background: #003366;
+            color: #fff;
             padding: 20px;
+            margin-top: 50px;
             text-align: center;
-            margin-top: 40px;
         }
-
-            footer i {
-                margin: 0 10px;
-                color: #FFD700;
-                cursor: pointer;
-            }
-
-                footer i:hover {
-                    color: white;
-                }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top" style="background:rgba(0,0,0,0.8)">
         <div class="container-fluid px-4">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-sun"></i> SOLVIA
-                <span>The Road to the Sun...</span>
+            <a class="navbar-brand text-warning" href="home.html">
+                <i class="fas fa-sun"></i> SOLVIA <span class="ms-2">The Road to the Sun...</span>
             </a>
-            <div class="collapse navbar-collapse justify-content-end">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <span id="welcomeText" class="nav-link text-warning"></span>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="hotels.html">Hotels</a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                    <li class="nav-item">
-                        <a href="../home.html" id="logoutBtn" class="nav-link text-danger d-none">
-                            <i class="fas fa-right-from-bracket"></i> Çıkış
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><span id="welcomeText" class="nav-link text-warning"></span></li>
+                <li class="nav-item"><a class="nav-link" href="hotels.html">Hotels</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                <li class="nav-item">
+                    <a href="#" id="logoutBtn" class="nav-link text-danger d-none">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 
-    <!-- Hotel Detail -->
-    <div class="container">
-        <div class="hotel-header">
-            <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb2101f?auto=format&fit=crop&w=800&q=80" alt="Hotel Image">
-            <div class="hotel-info">
-                <h2>Sunrise Resort</h2>
-                <p><i class="fas fa-map-marker-alt"></i> Antalya, Turkey</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bu otel sahilde, lüks ve konforlu bir deneyim sunar.</p>
-                <p class="rating"><i class="fas fa-star"></i> 4.5 / 5</p>
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1 id="heroHotelName">Hotel Detail</h1>
+    </div>
+
+    <!-- Tabs -->
+    <div class="container mt-4 hotel-header">
+        <ul class="nav nav-tabs" id="hotelTabs" role="tablist">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#info">Info</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#images">Images</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#rooms">Rooms</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews">Reviews</button></li>
+        </ul>
+        <div class="tab-content p-3 border border-top-0 rounded-bottom shadow-sm">
+
+            <!-- Info Tab -->
+            <div class="tab-pane fade show active" id="info">
+                <h2 id="hotelName">Hotel Name</h2>
+                <p id="hotelPhone" class="text-muted"></p>
+                <p id="hotelAddress" class="text-secondary"></p>
+                <p id="hotelProperties" class="text-dark"></p>
+            </div>
+
+            <!-- Images Tab -->
+            <div class="tab-pane fade" id="images">
+                <div class="row g-3" id="hotelImages"></div>
+            </div>
+
+            <!-- Rooms Tab -->
+            <div class="tab-pane fade" id="rooms">
+                <div class="mb-3">
+                    <label>Check-in</label>
+                    <input type="date" id="checkIn" class="form-control">
+                    <label class="mt-2">Check-out</label>
+                    <input type="date" id="checkOut" class="form-control">
+                    <button id="showRooms" class="btn btn-warning text-dark mt-3">Show Available Rooms</button>
+                </div>
+                <div class="row g-4 mt-3" id="hotelRooms"></div>
+            </div>
+
+            <!-- Reviews Tab -->
+            <div class="tab-pane fade" id="reviews">
+                <div id="customerRates"></div>
+                <hr>
+                <h5>Add Review</h5>
+                <div class="rating-stars mb-2" id="ratingStars">
+                    <i class="fa-regular fa-star" data-value="1"></i>
+                    <i class="fa-regular fa-star" data-value="2"></i>
+                    <i class="fa-regular fa-star" data-value="3"></i>
+                    <i class="fa-regular fa-star" data-value="4"></i>
+                    <i class="fa-regular fa-star" data-value="5"></i>
+                </div>
+                <textarea id="reviewText" class="form-control mb-2" placeholder="Write your review..."></textarea>
+                <button id="submitReview" class="btn btn-warning text-dark">Submit Review</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Reservation Modal -->
+    <div class="modal fade" id="reserveModal" tabindex="-1">
+        <div class="modal-dialog">
+            <form id="reserveForm" class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Reserve Room</h5></div>
+                <div class="modal-body">
+                    <input type="hidden" id="selectedRoomId">
+                    <div class="mb-2">
+                        <label>Start Date</label>
+                        <input type="date" id="startDate" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>End Date</label>
+                        <input type="date" id="endDate" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning text-dark">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Image Fullscreen Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark">
+                <img id="modalImage" class="w-100 rounded" />
             </div>
         </div>
-
-        <!-- Rooms Section -->
-        <h3 class="mb-4" style="color:#003366;">Available Rooms</h3>
-        <div class="row g-4">
-            <!-- Room 1 -->
-            <div class="col-md-4">
-                <div class="card room-card">
-                    <img src="https://images.unsplash.com/photo-1560448075-bb4bfc0c8d49?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Room 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Deluxe Room</h5>
-                        <p class="card-text">Price: $120 / night</p>
-                        <button class="btn btn-warning w-100">Reserve</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Room 2 -->
-            <div class="col-md-4">
-                <div class="card room-card">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Room 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Suite</h5>
-                        <p class="card-text">Price: $200 / night</p>
-                        <button class="btn btn-warning w-100">Reserve</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Room 3 -->
-            <div class="col-md-4">
-                <div class="card room-card">
-                    <img src="https://images.unsplash.com/photo-1628744445194-022d80139b2d?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Room 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Family Room</h5>
-                        <p class="card-text">Price: $150 / night</p>
-                        <button class="btn btn-warning w-100">Reserve</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Reservation Form -->
-        <h3 class="mt-5 mb-4" style="color:#003366;">Make a Reservation</h3>
-        <form class="row g-3">
-            <div class="col-md-6">
-                <label for="startDate" class="form-label">Start Date</label>
-                <input type="date" id="startDate" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-                <label for="endDate" class="form-label">End Date</label>
-                <input type="date" id="endDate" class="form-control" required>
-            </div>
-            <div class="col-12">
-                <label for="roomSelect" class="form-label">Select Room</label>
-                <select id="roomSelect" class="form-select" required>
-                    <option value="">Choose...</option>
-                    <option value="1">Deluxe Room</option>
-                    <option value="2">Suite</option>
-                    <option value="3">Family Room</option>
-                </select>
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-warning w-100">Confirm Reservation</button>
-            </div>
-        </form>
     </div>
 
     <!-- Footer -->
-    <footer>
-        <p>© 2025 SOLVIA - The Road to the Sun...</p>
-        <div>
-            <i class="fab fa-facebook fa-lg"></i>
-            <i class="fab fa-instagram fa-lg"></i>
-            <i class="fab fa-twitter fa-lg"></i>
-        </div>
-    </footer>
+    <footer><p>© 2025 SOLVIA - The Road to the Sun...</p></footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/hotel_detail.js"></script>
     <script src="js/common.js"></script>
 </body>
 </html>
